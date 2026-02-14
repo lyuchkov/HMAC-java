@@ -35,11 +35,6 @@ public class ServerHMAC {
             ConfigLoader loader = new ConfigLoader();
             AppConfig config = loader.load(CONFIG_PATH);
 
-            if (config.getSecret() == null || config.getSecret().isEmpty()) {
-                logger.severe("Config error: Secret is missing");
-                System.exit(1);
-            }
-
             HmacService hmacService = new HmacService(config.getSecret(), config.getHmacAlg());
             HttpServer server = HttpServer.create(new InetSocketAddress(config.getListenPort()), 0);
 
